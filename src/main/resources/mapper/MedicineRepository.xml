@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lec.spring.repository.MedicineRepository">
+
+<sql id="SELECT_BASE">
+    SELECT
+        id "id"
+    , itemName "itemName"
+    , entpName "entpName"
+    , itemSeq "itemSeq"
+    , efcyQesitm "efcyQesitm"
+    , useMethodQesitm "useMethodQesitm"
+    , atpnWarnQesitm "atpnWarnQesitm"
+    , atpnQesitm "atpnQesitm"
+    , depositMethodQesitm "depositMethodQesitm"
+    , intrcQesitm "intrcQesitm"
+    , seQesitm "seQesitm"
+    , itemImage "itemImage"
+    FROM medicine
+    WHERE 1=1
+</sql>
+
+    depositMethodQesitm varchar(1000),
+    intrcQesitm varchar(1000),
+    seQesitm varchar(1000),
+    itemImage varchar(1000)
+
+
+
+
+</mapper>
