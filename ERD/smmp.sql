@@ -14,7 +14,14 @@ CREATE TABLE medicine
     depositMethodQesitm varchar(1000),
     intrcQesitm varchar(1000),
     seQesitm varchar(1000),
-    itemImage varchar(1000)
+    itemImage varchar(1000),
+PRIMARY KEY (id)
 );
+
+DELETE FROM medicine;
+INSERT INTO medicine (itemName, entpName, itemSeq, efcyQesitm, useMethodQesitm, atpnWarnQesitm, atpnQesitm, depositMethodQesitm, intrcQesitm, seQesitm, itemImage)
+VALUES
+    ('활명수', '동화약품(주)', 195700020, '이', '이 약은', '이 약은', '이 약은', '이 약은', '이 약은', '이 약은', 'jj')
+;
 
 SELECT * FROM medicine;

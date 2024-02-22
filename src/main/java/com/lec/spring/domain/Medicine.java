@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Medicine {
-    private Long id;
     private String itemName;
     private String entpName;
     private Long itemSeq;

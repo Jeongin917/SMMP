@@ -21,6 +21,10 @@ public class MedicineServiceImpl implements MedicineService {
 
     private MedicineRepository medicineRepository;
 
+    // api data db에 저장
+
+
+
     // pagination
     @Override
     public List<Medicine> list(Integer page, Model model) {
@@ -81,6 +85,11 @@ public class MedicineServiceImpl implements MedicineService {
         model.addAttribute("endPage", endPage);   // [페이징] 에 표시할 마지막 페이지
 
         return list;
+    }
+
+    @Override
+    public List<Medicine> list() {
+        return null;
     }
 
 }

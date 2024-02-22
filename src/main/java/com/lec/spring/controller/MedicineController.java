@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -22,7 +24,8 @@ public class MedicineController {
         medicineService.list(page, model);
     }
 
-    @GetMapping("/medicine")
+    @GetMapping("/medicine/api")
+    @ResponseBody
     public String MedicineInfo(Model model) {
         List<Medicine> list = medicineService.list();
 

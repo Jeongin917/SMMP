@@ -4,8 +4,7 @@
 
 <sql id="SELECT_BASE">
     SELECT
-        id "id"
-    , itemName "itemName"
+      itemName "itemName"
     , entpName "entpName"
     , itemSeq "itemSeq"
     , efcyQesitm "efcyQesitm"
@@ -20,12 +19,31 @@
     WHERE 1=1
 </sql>
 
-    depositMethodQesitm varchar(1000),
-    intrcQesitm varchar(1000),
-    seQesitm varchar(1000),
-    itemImage varchar(1000)
+    <resultMap id="medicineApi" type="com.lec.spring.domain.Medicine">
+        <result column="id" property="id"/>
+        <result column="itemName" property="itemName"/>
+        <result column="entpName" property="entpName"/>
+        <result column="itemSeq" property="itemSeq"/>
+        <result column="efcyQesitm" property="efcyQesitm"/>
+        <result column="useMethodQesitm" property="useMethodQesitm"/>
+        <result column="atpnWarnQesitm" property="atpnWarnQesitm"/>
+        <result column="atpnQesitm" property="atpnQesitm"/>
+        <result column="depositMethodQesitm" property="depositMethodQesitm"/>
+        <result column="intrcQesitm" property="intrcQesitm"/>
+        <result column="seQesitm" property="seQesitm"/>
+        <result column="itemImage" property="itemImage"/>
+    </resultMap>
 
 
+    <select id="countAll" resultType="int">
+        SELECT count(*)
+        FROM medicine
+    </select>
+
+    <select id="selectFromRow" resultType="com.lec.spring.domain.Medicine">
+        <include refid="SELECT_BASE"/>
+        LIMIT #{param1}, #{param2}
+    </select>
 
 
 </mapper>
