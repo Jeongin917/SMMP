@@ -10,4 +10,6 @@ public interface MedicineService {
     List<Medicine> list(Integer page, Model model);
 
     List<Medicine> list();
+
+    int save(Medicine medicine);
 }

@@ -8,4 +8,8 @@ public interface MedicineRepository {
     int countAll();
 
     List<Medicine> selectFromRow(int from, Integer rows);
+
+    List<Medicine> findAll();
+
+    int save(Medicine medicine);
 }

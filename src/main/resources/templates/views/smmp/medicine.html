@@ -49,18 +49,56 @@
                 <button class="btn btn-secondary my-2 mx-1 my-sm-0" type="submit">Search</button>
             </form>
 
-            <table id="demoJSON" class="table table-hover mt-3-2"></table>
-            <script>
+<!--            <table id="demoJSON" class="table table-hover mt-3-2"></table>-->
+            <table class="table table-hover mt-3-2">
+                <thead>
+                <tr>
+                    <th class='text-center' scope="col">제품명</th>
+                    <th class='text-center' scope="col">업체명</th>
+                    <th class='text-center' scope="col">품목기준코드</th>
+                    <th class='text-center' scope="col">약의 효능</th>
+                    <th class='text-center' scope="col">보관방법</th>
+                    <th class='text-center' scope="col">More</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:action="${list}" class="table-active">
+                    <th th:text="${medicine.itemName}" scope="row"></th>
+                    <td th:text="${medicine.entpName}"></td>
+                    <td th:text="${medicine.itemSeq}"></td>
+                    <td th:text="${medicine.efcyQesitm}"></td>
+                    <td th:text="${medicine.useMethodQesitm}"></td>
+                    <td th:text="${medicine.atpnQesitm}"></td>
+                    <td th:text="${medicine.depositMethodQesitm}"></td>
+                    <td th:text="${medicine.intrcQesitm}"></td>
+                    <td th:text="${medicine.seQesitm}"></td>
+                    <td th:text="${medicine.atpnWarnQesitm}"></td>
+                    <td th:text="${medicine.itemImage}"></td>
+                </tr>
+                </tbody>
 
-                var api_key = "qldguqvXIu42xCDyOSTvTu%2BnmFiLjCH4ZUymYcnYP1bKYMt0XyZtC0PD%2Betdt%2Bn9Ylp5NRWM1%2Bpax7%2BjZZ6kow%3D%3D"
+            </table>
 
-                function loadData(pageNo) {
-                    console.log('눌렀음');
-                    let url = `https://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList?serviceKey=${api_key}&pageNo=${pageNo}&numOfRows=100&type=json`;
-                    fetch(url)
-                        .then(response => response.json())
-                        .then(jsonObj => parseJSON(jsonObj))
-                        // .catch(error => console.error('Error fetching data:', error));
+
+<!--                private String itemName;    entpName;
+                private String itemSeq;         efcyQesitm;
+                private String useMethodQesitm;     atpnQesitm;
+                private String depositMethodQesitm;     intrcQesitm;
+                private String seQesitm;        atpnWarnQesitm;
+                private String itemImage;-->
+
+           <!-- <script>
+
+                 var api_key = "qldguqvXIu42xCDyOSTvTu%2BnmFiLjCH4ZUymYcnYP1bKYMt0XyZtC0PD%2Betdt%2Bn9Ylp5NRWM1%2Bpax7%2BjZZ6kow%3D%3D"
+
+                   function loadData(pageNo) {
+                       console.log('눌렀음');
+                       let url = `https://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList?serviceKey=${api_key}&pageNo=${pageNo}&numOfRows=100&type=json`;
+                       fetch(url)
+                           .then(response => response.json())
+                           .then(jsonObj => parseJSON(jsonObj))
+                           // .catch(error => console.error('Error fetching data:', error));
+
                 } // end of loadData()
 
                 function parseJSON(jsonObj) {
@@ -78,12 +116,12 @@
                     jsonObj.body.items.forEach((row, index) => {
                         const rowColor = index % 2 === 0 ? "table-primary" : ""; // 번갈아가면서 색상 지정
                         table.push(`<tr class="${rowColor}">
-                <th class="align-middle">${row.itemName}</th> <!-- 제품명 -->
-                <td class="align-middle">${row.entpName}</td> <!-- 업체명 -->
-                <td class="align-middle">${row.itemSeq}</td> <!-- 품목기준코드 -->
-                <td class="align-middle">${row.efcyQesitm}</td> <!-- 약의 효능 -->
-                <td class="align-middle">${row.depositMethodQesitm}</td> <!-- 보관방법 -->
-                <td class="align-middle text-center"><i class="fas fa-search-plus" style="color: #0056d6;"></i></td> <!-- more -->
+                <th class="align-middle">${row.itemName}</th> &lt;!&ndash; 제품명 &ndash;&gt;
+                <td class="align-middle">${row.entpName}</td> &lt;!&ndash; 업체명 &ndash;&gt;
+                <td class="align-middle">${row.itemSeq}</td> &lt;!&ndash; 품목기준코드 &ndash;&gt;
+                <td class="align-middle">${row.efcyQesitm}</td> &lt;!&ndash; 약의 효능 &ndash;&gt;
+                <td class="align-middle">${row.depositMethodQesitm}</td> &lt;!&ndash; 보관방법 &ndash;&gt;
+                <td class="align-middle text-center"><i class="fas fa-search-plus" style="color: #0056d6;"></i></td> &lt;!&ndash; more &ndash;&gt;
                 </tr>
                 `);
                     });
@@ -95,10 +133,10 @@
                     loadData(pageNo);
                 }
 
-            </script>
+            </script>-->
+            <th:block th:insert="~{common/pagination::pagination}"></th:block>
 
-
-            <div>
+           <!-- <div>
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled">
                         <a class="page-link" href="#">&laquo;</a>
@@ -122,7 +160,7 @@
                         <a class="page-link" href="#">&raquo;</a>
                     </li>
                 </ul>
-            </div>
+            </div>-->
             <!-- End of Main Content -->
 
             <!-- 3. footer th 넣기-->

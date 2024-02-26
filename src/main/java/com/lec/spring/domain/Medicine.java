@@ -10,9 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Medicine {
+    private Long id;
     private String itemName;
     private String entpName;
-    private Long itemSeq;
+    private String itemSeq;
     private String efcyQesitm;
     private String useMethodQesitm;
     private String atpnQesitm;

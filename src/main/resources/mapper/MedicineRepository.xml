@@ -4,7 +4,8 @@
 
 <sql id="SELECT_BASE">
     SELECT
-      itemName "itemName"
+    id "id"
+    , itemName "itemName"
     , entpName "entpName"
     , itemSeq "itemSeq"
     , efcyQesitm "efcyQesitm"
@@ -34,6 +35,14 @@
         <result column="itemImage" property="itemImage"/>
     </resultMap>
 
+    <insert id="save" flushCache="true" parameterType="com.lec.spring.domain.Medicine">
+        insert into medicine
+        (id, itemName, entpName, itemSeq, efcyQesitm, useMethodQesitm, atpnWarnQesitm, atpnQesitm, depositMethodQesitm,
+         intrcQesitm, seQesitm, itemImage)
+        VALUES (#{id}, #{itemName}, #{entpName}, #{itemSeq}, #{efcyQesitm}, #{useMethodQesitm}, #{atpnWarnQesitm},
+                #{atpnQesitm}, #{depositMethodQesitm}, #{intrcQesitm}, #{seQesitm}, #{itemImage})
+
+    </insert>
 
     <select id="countAll" resultType="int">
         SELECT count(*)
@@ -43,6 +52,9 @@
     <select id="selectFromRow" resultType="com.lec.spring.domain.Medicine">
         <include refid="SELECT_BASE"/>
         LIMIT #{param1}, #{param2}
+    </select>
+    <select id="findAll" resultType="com.lec.spring.domain.Medicine">
+        <include refid="SELECT_BASE"/>
     </select>
 
 
