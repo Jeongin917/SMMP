@@ -51,7 +51,7 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Scheduled(fixedDelay = 3600000)
     public void saveApi() throws IOException {
-        for (int pageNo = 1; pageNo <= 50; pageNo++) {
+        for (int pageNo = 1; pageNo <= 5; pageNo++) {
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList"); /*URL*/
             urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=qldguqvXIu42xCDyOSTvTu%2BnmFiLjCH4ZUymYcnYP1bKYMt0XyZtC0PD%2Betdt%2Bn9Ylp5NRWM1%2Bpax7%2BjZZ6kow%3D%3D"); /*Service Key*/
             urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode(String.valueOf(pageNo), "UTF-8")); /*페이지번호*/

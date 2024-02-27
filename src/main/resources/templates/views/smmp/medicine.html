@@ -40,157 +40,142 @@
             <th:block th:insert="~{common/topbar::topbar}"></th:block>
 
             <!-- main contents 작성 -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4 px-1">
-                <h1 class="h3 mb-0 text-gray-800">Search My Medicine Information</h1>
-            </div>
+            <main>
+                <div class="d-sm-flex align-items-center justify-content-between mb-4 px-1">
+                    <h1 class="h3 mb-0 text-gray-800">Search My Medicine Information</h1>
+                </div>
 
-            <form class="d-flex w-50 mb-2 px-1">
-                <input class="form-control me-sm-2" type="search" placeholder="Search">
-                <button class="btn btn-secondary my-2 mx-1 my-sm-0" type="submit">Search</button>
-            </form>
+                <form class="d-flex w-50 mb-2 px-1">
+                    <input class="form-control me-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-secondary my-2 mx-1 my-sm-0" type="submit">Search</button>
+                </form>
 
-<!--            <table id="demoJSON" class="table table-hover mt-3-2"></table>-->
-            <table class="table table-hover mt-3-2">
-                <thead>
-                <tr>
-                    <th class='text-center' scope="col">제품명</th>
-                    <th class='text-center' scope="col">업체명</th>
-                    <th class='text-center' scope="col">품목기준코드</th>
-                    <th class='text-center' scope="col">약의 효능</th>
-                    <th class='text-center' scope="col">보관방법</th>
-                    <th class='text-center' scope="col">More</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:action="${list}" class="table-active">
-                    <th th:text="${medicine.itemName}" scope="row"></th>
-                    <td th:text="${medicine.entpName}"></td>
-                    <td th:text="${medicine.itemSeq}"></td>
-                    <td th:text="${medicine.efcyQesitm}"></td>
-                    <td th:text="${medicine.useMethodQesitm}"></td>
-                    <td th:text="${medicine.atpnQesitm}"></td>
-                    <td th:text="${medicine.depositMethodQesitm}"></td>
-                    <td th:text="${medicine.intrcQesitm}"></td>
-                    <td th:text="${medicine.seQesitm}"></td>
-                    <td th:text="${medicine.atpnWarnQesitm}"></td>
-                    <td th:text="${medicine.itemImage}"></td>
-                </tr>
-                </tbody>
+                <table class="table table-hover mt-3-2">
+                    <thead>
+                    <tr>
+                        <th class='text-center' scope="col">제품명</th>
+                        <th class='text-center' scope="col">업체명</th>
+                        <th class='text-center' scope="col">품목기준코드</th>
+                        <th class='text-center' scope="col">약의 효능</th>
+                        <th class='text-center' scope="col">보관방법</th>
+                        <th class='text-center' scope="col">More</th>
+                    </tr>
+                    </thead>
 
-            </table>
+                    <tbody>
+                    <!-- Medicine 객체들을 반복하여 테이블 행 생성 -->
+                    <tr th:each="medicine : ${list}" >
+                        <td th:text="${medicine.itemName}" class="align-middle"></td>
+                        <td th:text="${medicine.entpName}" class="align-middle"></td>
+                        <td th:text="${medicine.itemSeq}" class="align-middle"></td>
+                        <td th:text="${medicine.efcyQesitm}" class="align-middle"></td>
+                        <td th:text="${medicine.depositMethodQesitm}" class="align-middle"></td>
+                        <td class="align-middle text-center">
+                            <button class="btn btn-link" style="color: #0056d6;" onclick="openModal('${medicine.itemName}', '${medicine.entpName}', '${medicine.itemSeq}', '${medicine.efcyQesitm}', '${medicine.useMethodQesitm}', '${medicine.atpnWarnQesitm}', '${medicine.atpnQesitm}', '${medicine.intrcQesitm}', '${medicine.seQesitm}', '${medicine.depositMethodQesitm}', '${medicine.itemImage}')">
+                                <i class="fas fa-search-plus" style="color: #0056d6;"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+                <!-- 모달 창 -->
+                <div id="myModal" class="modal">
+
+                    <!-- 모달 창 컨텐츠 -->
+                    <div class="modal-content">
+                        <span class="close" style="text-align: right">&times;</span>
+                        <h2>상세정보</h2>
+                        <p id="itemName"></p>
+                        <p id="entpName"></p>
+                        <p id="itemSeq"></p>
+                        <p id="efcyQesitm"></p>
+                        <p id="useMethodQesitm"></p>
+                        <p id="atpnWarnQesitm"></p>
+                        <p id="atpnQesitm"></p>
+                        <p id="intrcQesitm"></p>
+                        <p id="seQesitm"></p>
+                        <p id="depositMethodQesitm"></p>
+                        <p id="itemImage"></p>
+                    </div>
+
+                </div>
 
 
-<!--                private String itemName;    entpName;
-                private String itemSeq;         efcyQesitm;
-                private String useMethodQesitm;     atpnQesitm;
-                private String depositMethodQesitm;     intrcQesitm;
-                private String seQesitm;        atpnWarnQesitm;
-                private String itemImage;-->
+            </main>
 
-           <!-- <script>
+            <script th:inline="javascript">
+                function openModal(itemName, entpName, itemSeq, efcyQesitm, useMethodQesitm, atpnWarnQesitm, atpnQesitm, intrcQesitm, seQesitm, depositMethodQesitm, itemImage) {
+                    $("#myModal").css("display", "block");
+                    $("#itemName").text("제품명: " + itemName);
+                    $("#entpName").text("업체명: " + entpName);
+                    $("#itemSeq").text("품목기준코드: " + itemSeq);
+                    $("#efcyQesitm").text("약의 효능: " + efcyQesitm);
+                    $("#useMethodQesitm").text("약 복용 방법: " + useMethodQesitm);
+                    $("#atpnWarnQesitm").text("사용 전 주의사항: " + atpnWarnQesitm);
+                    $("#atpnQesitm").text("복용 시 주의사항: " + atpnQesitm);
+                    $("#intrcQesitm").text("약 복용 시 주의해야할 음식 또는 약: " + intrcQesitm);
+                    $("#seQesitm").text("부작용: " + seQesitm);
+                    $("#depositMethodQesitm").text("보관방법: " + depositMethodQesitm);
+                    $("#itemImage").text("약 이미지: " + itemImage);
 
-                 var api_key = "qldguqvXIu42xCDyOSTvTu%2BnmFiLjCH4ZUymYcnYP1bKYMt0XyZtC0PD%2Betdt%2Bn9Ylp5NRWM1%2Bpax7%2BjZZ6kow%3D%3D"
+                }
 
-                   function loadData(pageNo) {
-                       console.log('눌렀음');
-                       let url = `https://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList?serviceKey=${api_key}&pageNo=${pageNo}&numOfRows=100&type=json`;
-                       fetch(url)
-                           .then(response => response.json())
-                           .then(jsonObj => parseJSON(jsonObj))
-                           // .catch(error => console.error('Error fetching data:', error));
+                function closeModal() {
+                    $("#myModal").css("display", "none");
+                }
 
-                } // end of loadData()
-
-                function parseJSON(jsonObj) {
-                    const table = [];
-                    table.push("<tr>" +
-                        "<th class='text-center' scope=\"col\">제품명</th>" +
-                        "<th class='text-center' scope=\"col\">업체명</th>" +
-                        "<th class='text-center' scope=\"col\">품목기준코드</th>" +
-                        "<th class='text-center' scope=\"col\">약의 효능</th>" +
-                        "<th class='text-center' scope=\"col\">보관방법</th>" +
-                        "<th class='text-center' scope=\"col\">More</th>" +
-                        "</tr>");
-                    console.log(jsonObj);
-
-                    jsonObj.body.items.forEach((row, index) => {
-                        const rowColor = index % 2 === 0 ? "table-primary" : ""; // 번갈아가면서 색상 지정
-                        table.push(`<tr class="${rowColor}">
-                <th class="align-middle">${row.itemName}</th> &lt;!&ndash; 제품명 &ndash;&gt;
-                <td class="align-middle">${row.entpName}</td> &lt;!&ndash; 업체명 &ndash;&gt;
-                <td class="align-middle">${row.itemSeq}</td> &lt;!&ndash; 품목기준코드 &ndash;&gt;
-                <td class="align-middle">${row.efcyQesitm}</td> &lt;!&ndash; 약의 효능 &ndash;&gt;
-                <td class="align-middle">${row.depositMethodQesitm}</td> &lt;!&ndash; 보관방법 &ndash;&gt;
-                <td class="align-middle text-center"><i class="fas fa-search-plus" style="color: #0056d6;"></i></td> &lt;!&ndash; more &ndash;&gt;
-                </tr>
-                `);
+                $(document).ready(function() {
+                    // 모달 닫기 버튼 클릭 이벤트 처리
+                    $(".close").click(function() {
+                        closeModal();
                     });
-                    document.getElementById('demoJSON').innerHTML += table.join('\n'); // join method를 string으로 바꾼다
-                }
 
-                // 1에서 500까지의 페이지를 순회하며 데이터 로드
-                for (let pageNo = 1; pageNo <= 500; pageNo++) {
-                    loadData(pageNo);
-                }
+                    // 모달 외부 클릭 시 모달 닫기
+                    $(window).click(function(event) {
+                        if (event.target == document.getElementById('myModal')) {
+                            closeModal();
+                        }
+                    });
+                });
+            </script>
 
-            </script>-->
+
+            <!-- 3. pagination th 넣기-->
             <th:block th:insert="~{common/pagination::pagination}"></th:block>
 
-           <!-- <div>
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">&laquo;</a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">&raquo;</a>
-                    </li>
-                </ul>
-            </div>-->
-            <!-- End of Main Content -->
-
-            <!-- 3. footer th 넣기-->
-            <th:block th:insert="~{common/footer::footer}"></th:block>
-
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        <!-- 4. footer th 넣기-->
+        <th:block th:insert="~{common/footer::footer}"></th:block>
 
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- 4. logoutmodal th 넣기-->
-    <th:block th:insert="~{common/logoutmodal::logoutmodal}"></th:block>
+</div>
+<!-- End of Page Wrapper -->
 
-    <!-- Bootstrap core JavaScript-->
-    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- 5. logoutmodal th 넣기-->
+<th:block th:insert="~{common/logoutmodal::logoutmodal}"></th:block>
 
-    <!-- Core plugin JavaScript-->
-    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script th:src="@{/js/sb-admin-2.min.js}"></script>
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
-    <!-- Page level plugins -->
-    <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+<!-- Custom scripts for all pages-->
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
 
-    <!-- Page level custom scripts -->
-    <script th:src="@{/js/demo/chart-area-demo.js}"></script>
-    <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+<!-- Page level plugins -->
+<script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+
+<!-- Page level custom scripts -->
+<script th:src="@{/js/demo/chart-area-demo.js}"></script>
+<script th:src="@{/js/demo/chart-pie-demo.js}"></script>
 
 </body>
 
